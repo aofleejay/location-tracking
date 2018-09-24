@@ -1,18 +1,41 @@
 import React, { Component } from 'react'
+import { Container, Header, Body, Content, Button, Text } from 'native-base'
 import MapboxGL from '@mapbox/react-native-mapbox-gl'
 
 MapboxGL.setAccessToken('')
 
 class App extends Component {
+  state = { coords: null }
+
+  componentDidMount() {
+    this.watchID = navigator.geolocation.watchPosition((position) => {
+      this.setState({ coords: position.coords })
+    })
+  }
+
+  clearWatch = () => {
+    if (this.watchID !== undefined) {
+      navigator.geolocation.clearWatch(this.watchID)
+      this.watchID = undefined
+    }
+  }
+
   render() {
     return (
-      <MapboxGL.MapView
-        centerCoordinate={[
-          100.53140938282013,
-          13.727081778875078,
-        ]}
-        style={{ flex: 1 }}
-      />
+      <Container>
+        <Header>
+          <Body>
+            <Text>Location Tracking</Text>
+          </Body>
+        </Header>
+        <Content padder>
+          <Text>latitude: {this.state.coords?.latitude}</Text>
+          <Text>longitude: {this.state.coords?.longitude}</Text>
+          <Button block warning onPress={this.clearWatch}>
+            <Text>clear watch</Text>
+          </Button>
+        </Content>
+      </Container>
     )
   }
 }
