@@ -5,8 +5,10 @@ class App extends Component {
   state = {
     watchCoords: null,
     watchError: null,
+    watchTriggerCount: 0,
     intervalCoords: null,
     intervalError: null,
+    intervalTriggerCount: 0,
   }
 
   componentDidMount() {
@@ -21,7 +23,7 @@ class App extends Component {
 
   startWatchingLocation = () => {
     this.watchID = navigator.geolocation.watchPosition(
-      (position) => { this.setState({ watchCoords: position.coords }) },
+      (position) => { this.setState({ watchCoords: position.coords, watchTriggerCount: this.state.watchTriggerCount + 1 }) },
       (error) => { this.setState({ watchError: error }) },
       { enableHighAccuracy: false },
     )
@@ -35,7 +37,7 @@ class App extends Component {
 
   pollingLocation = () => {
     navigator.geolocation.getCurrentPosition(
-      (position) => { this.setState({ intervalCoords: position.coords }) },
+      (position) => { this.setState({ intervalCoords: position.coords, intervalTriggerCount: this.state.intervalTriggerCount + 1  }) },
       (error) => { this.setState({ intervalError: error }) },
       { enableHighAccuracy: false },
     )
@@ -69,6 +71,7 @@ class App extends Component {
               <Body>
                 <Text>latitude: {this.state.watchCoords?.latitude}</Text>
                 <Text>longitude: {this.state.watchCoords?.longitude}</Text>
+                <Text>trigger count: {this.state.watchTriggerCount}</Text>
                 <Text>error: {JSON.stringify(this.state.watchError)}</Text>
               </Body>
             </CardItem>
@@ -91,6 +94,7 @@ class App extends Component {
               <Body>
                 <Text>latitude: {this.state.intervalCoords?.latitude}</Text>
                 <Text>longitude: {this.state.intervalCoords?.longitude}</Text>
+                <Text>trigger count: {this.state.intervalTriggerCount}</Text>
                 <Text>error: {JSON.stringify(this.state.intervalError)}</Text>
               </Body>
             </CardItem>
