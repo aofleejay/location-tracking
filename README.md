@@ -1,16 +1,66 @@
 # React-Native location tracking
-React-Native location tracking example application.
+Location tracking application by using [React Native geolocation API](https://facebook.github.io/react-native/docs/geolocation).
 
 ## Getting Started
 ```
 $ yarn or npm install
 
-// iOS
 $ cd ios
 $ pod install
 $ cd ..
-$ react-native run-ios or react-native run-ios --device="device name"
+$ react-native link native-base
 
-// Android
-$ react-native run-android
+
+$ react-native run-ios      // iOS
+$ react-native run-android  // Android
 ```
+
+## Implementation
+### Use `setInterval` and `navigation.geolocation.getCurrentPosition`
+Invokes the callback once when receive location.
+```javascript
+const intervalID = setInterval(() => {
+  navigator.geolocation.getCurrentPosition((position) => {
+    this.setState({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+    })
+  })
+}, 10000) // Get location every 10 seconds.
+```
+### Use `navigation.geolocation.watchPosition`
+Invokes the callback when the location changes.
+```javascript
+const watchID = navigator.geolocation.watchPosition((position) => {
+  this.setState({
+    latitude: position.coords.latitude,
+    longitude: position.coords.longitude,
+  })
+})
+```
+
+## GPS Accuracy
+Latitude and longitude can be found inside `position.coords` object. It's precision is around 7 - 15.
+```json
+{
+  coords: {
+    accuracy: 5
+    altitude: 0
+    altitudeAccuracy: -1
+    heading: 316.76
+    latitude: 37.43354365
+    longitude: -122.24095367
+    speed: 33.21
+  },
+  timestamp: 1537954475356.8079
+}
+```
+
+## Battery Comsumption
+I use iPhone 7 with 82% maximum capacity for testing.
+
+## Todo List
+- [x] Implementation
+- [x] GPS Accuracy
+- [ ] Battery Comsumption
+- [ ] Background location
