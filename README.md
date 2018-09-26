@@ -1,4 +1,4 @@
-# React-Native location tracking
+# React Native location tracking
 Location tracking application by using [React Native geolocation API](https://facebook.github.io/react-native/docs/geolocation).
 
 ## Getting Started
@@ -43,16 +43,16 @@ const watchID = navigator.geolocation.watchPosition((position) => {
 Latitude and longitude can be found inside `position.coords` object. It's precision is around 7 - 15.
 ```json
 {
-  coords: {
-    accuracy: 5
-    altitude: 0
-    altitudeAccuracy: -1
-    heading: 316.76
-    latitude: 37.43354365
-    longitude: -122.24095367
-    speed: 33.21
+  "coords": {
+    "accuracy": 5,
+    "altitude": 0,
+    "altitudeAccuracy": -1,
+    "heading": 316.76,
+    "latitude": 37.43354365,
+    "longitude": -122.24095367,
+    "speed": 33.21
   },
-  timestamp: 1537954475356.8079
+  "timestamp": 1537954475356.8079
 }
 ```
 
