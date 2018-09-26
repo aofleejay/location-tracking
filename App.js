@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import { Container, Header, Body, Content, Button, Text } from 'native-base'
-import MapboxGL from '@mapbox/react-native-mapbox-gl'
-
-MapboxGL.setAccessToken('')
 
 class App extends Component {
   state = { coords: null }
@@ -14,10 +11,7 @@ class App extends Component {
   }
 
   clearWatch = () => {
-    if (this.watchID !== undefined) {
-      navigator.geolocation.clearWatch(this.watchID)
-      this.watchID = undefined
-    }
+    navigator.geolocation.clearWatch(this.watchID)
   }
 
   render() {
