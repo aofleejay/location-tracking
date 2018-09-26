@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Header, Body, Content, Card, CardItem, Button, Text } from 'native-base'
+import { Container, Header, Body, Content, Card, CardItem, Button, Text, Left } from 'native-base'
 
 class App extends Component {
   state = {
@@ -72,6 +72,10 @@ class App extends Component {
                 <Text>latitude: {this.state.watchCoords?.latitude}</Text>
                 <Text>longitude: {this.state.watchCoords?.longitude}</Text>
                 <Text>error: {JSON.stringify(this.state.watchError)}</Text>
+              </Body>
+            </CardItem>
+            <CardItem>
+              <Body>
                 <Button block warning onPress={this.stopWatchingLocation}>
                   <Text>Stop Watching</Text>
                 </Button>
@@ -90,6 +94,10 @@ class App extends Component {
                 <Text>latitude: {this.state.intervalCoords?.latitude}</Text>
                 <Text>longitude: {this.state.intervalCoords?.longitude}</Text>
                 <Text>error: {JSON.stringify(this.state.intervalError)}</Text>
+              </Body>
+            </CardItem>
+            <CardItem>
+              <Body>
                 <Button block warning onPress={this.stopPollingLocation}>
                   <Text>Stop Polling</Text>
                 </Button>
