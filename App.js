@@ -19,27 +19,25 @@ class App extends Component {
     this.stopPollingLocation()
   }
 
-  startWatchingLocation() {
+  startWatchingLocation = () => {
     this.watchID = navigator.geolocation.watchPosition(
-      (position) => {
-        this.setState({ watchCoords: position.coords })
-      },
+      (position) => { this.setState({ watchCoords: position.coords }) },
       (error) => { this.setState({ watchError: error }) },
+      { enableHighAccuracy: false },
     )
   }
 
-  startPollingLocation(interval = 10000) {
+  startPollingLocation = (interval = 10000) => {
     this.pollingLocation()
 
     this.intervalID = setInterval(this.pollingLocation, interval)
   }
 
-  pollingLocation() {
+  pollingLocation = () => {
     navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({ intervalCoords: position.coords })
-      },
+      (position) => { this.setState({ intervalCoords: position.coords }) },
       (error) => { this.setState({ intervalError: error }) },
+      { enableHighAccuracy: false },
     )
   }
 

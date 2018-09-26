@@ -56,6 +56,15 @@ Latitude and longitude can be found inside `position.coords` object. It's precis
 }
 ```
 
+Select accuracy mode by passing an options object as third parameter (High accuracy mode give more accurate location but may slower response and consume more battery).
+```javascript
+const watchID = navigator.geolocation.watchPosition((position) => {
+  (position) => { /* success callback */ },
+  (error) => { /* error callback */ },
+  { enableHighAccuracy: true }, // options
+})
+```
+
 ## Battery Comsumption
 I use iPhone 7 with 82% maximum capacity for testing.
 
